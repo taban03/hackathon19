@@ -7,12 +7,12 @@ import authenticationReducer from './authentication.reducer';
 import selectedServiceReducer from './selected-service-reducer';
 
 const reducers = {
-    filtersReducer,
-    tilesReducer,
-    loadingReducer,
-    errorReducer,
-    authenticationReducer,
-    selectedServiceReducer,
+  filtersReducer,
+  tilesReducer,
+  loadingReducer,
+  errorReducer,
+  authenticationReducer,
+  selectedServiceReducer,
 };
 
 // eslint-disable-next-line import/prefer-default-export
