@@ -1,7 +1,8 @@
+
 plugins {
     id "com.moowork.node" version "1.2.0"
 }
-
+apply plugin: 'base'
 node {
     // Version of node to use.
     version = rootProject.nodejsVersion
