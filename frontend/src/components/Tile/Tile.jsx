@@ -60,10 +60,18 @@ export default class Tile extends Component {
   // not a great way to avoid overlapping text in a card block
   // Mineral bug
   shortenDescription = description => {
-    if (description != null && description.length > 180) {
+      console.log(description);
+    if (description != null || !description.isEmpty() || description.length > 180) {
       return `${description.substring(0, 177)}...`;
     }
     return description;
+  };
+
+  shortenCommithash = hash => {
+    if (hash != null || hash.length > 10) {
+      return `${hash.substring(0, 10)}...`;
+    }
+    return hash;
   };
 
   render() {
@@ -75,9 +83,11 @@ export default class Tile extends Component {
           {tile.name}
         </CardTitle>
         <CardBlock className="commit-hash">
-          <Link href="http://example.com">{tile.currentRelease.commitHash}</Link>
+          <Link href="http://example.com">
+              {this.shortenCommithash(tile.currentRelease.commitHash)}
+          </Link>
         </CardBlock>
-        <CardBlock className="tile-notes">{this.shortenDescription(tile.currentRelease.notes)}</CardBlock>
+        <CardBlock className="tile-notes">{tile.currentRelease.notes}</CardBlock>
         <CardStatus variant="danger" className="grid-tile-status">
           Version : {tile.currentRelease.version}
         </CardStatus>
