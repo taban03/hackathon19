@@ -1,0 +1,43 @@
+#logo {
+    height: 48px;
+    width: 48px;
+    background-color: transparent;
+}
+
+#logo2 {
+    height: 34px;
+    width: 34px;
+    background-color: transparent;
+}
+.product-name > a > .css-1un8gmf {
+    align-self: center;
+    margin-bottom: 0;
+}
+
+.product-name > a:hover {
+    text-decoration: none;
+}
+
+.logout-container svg {
+    /*transition: color .3s ease-in-out;*/
+}
+
+.logout-container button.css-1upkw8q-Button:hover svg {
+    color: #111111;
+}
+
+.header {
+    background-color: #ce3d3d;
+}
+
+.css-1i58psh:hover {
+    background-color: #5691f0;
+}
+.dropdown {
+    height: 24px;
+    margin: -8px -157px;
+    position: absolute;
+}
+css-1b3gl36-Button {
+    height: 23px
+}
