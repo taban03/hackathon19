@@ -38,7 +38,7 @@ function checkOrigin() {
 function getUrl(action) {
   // let url =
   //     process.env.REACT_APP_GATEWAY_URL + process.env.REACT_APP_CATALOG_HOME + process.env.REACT_APP_CATALOG_UPDATE;
-  let url = 'https://localhost:80/api/v1/catalogs/1.5.0';
+  let url = 'https://localhost:80/api/v1/catalogs/latest';
   console.log(url);
   if (action.payload !== undefined) {
     url += `/${action.payload}`;
