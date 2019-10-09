@@ -5,18 +5,19 @@ export const createLoadingSelector = actions => state => _(actions).some(action 
 
 // eslint-disable-next-line
 export const getVisibleTiles = (tiles, searchCriteria) => {
-    if (tiles === undefined || tiles === null || tiles.length <= 0) {
-        return [];
-    }
-    return tiles
-        .filter(tile => {
-            if (searchCriteria === undefined || searchCriteria === null || searchCriteria.length === 0) {
-                return true;
-            }
-            return (
-                tile.title.toLowerCase().includes(searchCriteria.toLowerCase()) ||
-                tile.description.toLowerCase().includes(searchCriteria.toLowerCase())
-            );
-        })
-        .sort((tile1, tile2) => tile1.title.localeCompare(tile2.title));
+    console.log(tiles)
+  if (tiles === undefined || tiles === null || tiles.length <= 0) {
+    return [];
+  }
+  return tiles
+    .filter(tile => {
+      if (searchCriteria === undefined || searchCriteria === null || searchCriteria.length === 0) {
+        return true;
+      }
+      return (
+        tile.name.toLowerCase().includes(searchCriteria.toLowerCase()) ||
+        tile.repository.toLowerCase().includes(searchCriteria.toLowerCase())
+      );
+    })
+    .sort((tile1, tile2) => tile1.name.localeCompare(tile2.name));
 };
