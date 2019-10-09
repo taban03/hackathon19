@@ -61,14 +61,20 @@ export default class Tile extends Component {
   // Mineral bug
   shortenDescription = description => {
       console.log(description);
-    if (description != null || !description.isEmpty() || description.length > 180) {
+      if (description == null ){
+        return description;
+      }
+    if (!description.isEmpty() || description.length > 180) {
       return `${description.substring(0, 177)}...`;
     }
     return description;
   };
 
   shortenCommithash = hash => {
-    if (hash != null || hash.length > 10) {
+    if (hash == null) {
+      return hash;
+    }
+    if ( hash.length > 10) {
       return `${hash.substring(0, 10)}...`;
     }
     return hash;
