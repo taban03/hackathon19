@@ -5,14 +5,16 @@ import loadingReducer from './loading-reducer';
 import errorReducer from './error-reducer';
 import authenticationReducer from './authentication.reducer';
 import selectedServiceReducer from './selected-service-reducer';
+import zoweVersionsReducer from './zowe-versions-reducer';
 
 const reducers = {
-  filtersReducer,
-  tilesReducer,
-  loadingReducer,
-  errorReducer,
-  authenticationReducer,
-  selectedServiceReducer,
+    filtersReducer,
+    tilesReducer,
+    loadingReducer,
+    errorReducer,
+    authenticationReducer,
+    selectedServiceReducer,
+    zoweVersionsReducer,
 };
 
 // eslint-disable-next-line import/prefer-default-export

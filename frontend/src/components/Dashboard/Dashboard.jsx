@@ -50,7 +50,7 @@ export default class Dashboard extends Component {
                         <div className="grid-container">
                             <div className="filtering-container">
                                 <Shield title="Search Bar is broken !">
-                                    <SearchCriteria placeholder="Search for APIs" doSearch={this.handleSearch} />
+                                    <SearchCriteria placeholder="Search for Zowe components" doSearch={this.handleSearch} />
                                 </Shield>
                                 <h2 className="api-heading">Available Zowe components</h2>
                             </div>

@@ -1,14 +1,27 @@
 import { connect } from 'react-redux';
-import { userActions } from '../../actions/user.actions';
 import Header from './Header';
+import {
+    fetchZoweVersionsSuccess,
+    fetchZoweVersionsError,
+    fetchVersions
+} from '../../actions/fetch-versions-actions';
+import {getVisibleTiles} from '../../selectors/selectors';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    versions: state.zoweVersionsReducer.versions,
+    error: state.zoweVersionsReducer.error,
+});
 
 const mapDispatchToProps = {
-    logout: () => userActions.logout(),
-};
+    fetchZoweVersionsSuccess,
+    fetchZoweVersionsError,
+    fetchVersions,
+}
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Header);
+
+
+
