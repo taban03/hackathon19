@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Text, Dropdown, Button } from 'mineral-ui';
 
 import productImage from '../../assets/images/zowe-catatalog-logo.png';
-import githubImage from '../../assets/images/github.png';
+import githubImage from '../../assets/images/github.jpeg';
 import './Header.css';
 
 export default class Header extends Component {
@@ -39,7 +39,6 @@ export default class Header extends Component {
         //             // onClick: event => { console.log(event); }
         //         }
         //     ]
-        console.log("VERSIONEEEE")
         // console.log(data)
         return (
             <div className="header">

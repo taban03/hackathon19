@@ -35,9 +35,18 @@
 }
 .dropdown {
     height: 24px;
-    margin: -8px -157px;
+    margin: -8px -180px;
     position: absolute;
 }
-css-1b3gl36-Button {
-    height: 23px
+.css-1b3gl36-Button {
+    height: 23px;
+    width: 145px;
+    font-size: 11px;
+
 }
+
+#drop1 {
+    position: absolute;
+    margin-left: -147px;
+}
+

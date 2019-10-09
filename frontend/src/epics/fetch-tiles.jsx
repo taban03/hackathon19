@@ -4,6 +4,7 @@ import { ofType } from 'redux-observable';
 import { catchError, debounceTime, exhaustMap, map, mergeMap, retryWhen, takeUntil } from 'rxjs/operators';
 import { FETCH_TILES_REQUEST, FETCH_TILES_STOP } from '../constants/catalog-tile-constants';
 import { fetchTilesFailed, fetchTilesRetry, fetchTilesSuccess } from '../actions/catalog-tile-actions';
+// require('dotenv').config()
 
 const updatePeriod = Number(process.env.REACT_APP_STATUS_UPDATE_PERIOD);
 const debounce = Number(process.env.REACT_APP_STATUS_UPDATE_DEBOUNCE);
@@ -36,9 +37,10 @@ function checkOrigin() {
  * @returns the URL to call
  */
 function getUrl(action) {
-  // let url =
-  //     process.env.REACT_APP_GATEWAY_URL + process.env.REACT_APP_CATALOG_HOME + process.env.REACT_APP_CATALOG_UPDATE;
-  let url = 'https://localhost:80/api/v1/catalogs/latest';
+    console.log(process.env.REACT_APP_GATEWAY_URL);
+  let url =
+      process.env.REACT_APP_GATEWAY_URL + process.env.REACT_APP_CATALOG_HOME + process.env.REACT_APP_CATALOG_VERSION;
+  // let url = 'https://localhost:80/api/v1/catalogs/latest';
   console.log(url);
   if (action.payload !== undefined) {
     url += `/${action.payload}`;
