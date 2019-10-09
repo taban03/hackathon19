@@ -4,7 +4,6 @@ import { ofType } from 'redux-observable';
 import { catchError, debounceTime, exhaustMap, map, mergeMap, retryWhen, takeUntil } from 'rxjs/operators';
 import { FETCH_TILES_REQUEST, FETCH_TILES_STOP } from '../constants/catalog-tile-constants';
 import { fetchTilesFailed, fetchTilesRetry, fetchTilesSuccess } from '../actions/catalog-tile-actions';
-import { userActions } from '../actions/user.actions';
 
 const updatePeriod = Number(process.env.REACT_APP_STATUS_UPDATE_PERIOD);
 const debounce = Number(process.env.REACT_APP_STATUS_UPDATE_DEBOUNCE);
@@ -123,9 +122,6 @@ export const fetchTilesPollingEpic = (action$, store, { ajax, scheduler }) =>
                 ),
                 takeUntil(action$.ofType(FETCH_TILES_STOP)),
                 catchError(error => {
-                    if (error.status === 401 || error.status === 403) {
-                        return of(userActions.authenticationFailure(error));
-                    }
                     return of(fetchTilesFailed(error));
                 })
             )
