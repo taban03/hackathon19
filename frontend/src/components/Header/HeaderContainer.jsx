@@ -5,7 +5,6 @@ import {
     fetchZoweVersionsError,
     fetchVersions
 } from '../../actions/fetch-versions-actions';
-import {getVisibleTiles} from '../../selectors/selectors';
 
 const mapStateToProps = state => ({
     versions: state.zoweVersionsReducer.versions,
