@@ -74,7 +74,7 @@ a {
 
 @media (min-width: 972px) {
     .apis {
-        background-image: url(../../assets/images/background.svg);
+        background-image: url(../../assets/images/dependency-graph.png);
     }
 }
 
