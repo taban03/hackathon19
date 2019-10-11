@@ -82,7 +82,7 @@ export default class Tile extends Component {
 
   render() {
     const { tile } = this.props;
-    const repoUrl = <Link href={`https://github.com/zowe/${  tile.repository}`}>
+    const repoUrl = <Link href={`https://github.com/zowe/${tile.repository}`}>
         {`https://github.com/zowe/${  tile.repository}`}
   </Link>
     return (
@@ -91,9 +91,8 @@ export default class Tile extends Component {
           {tile.name}
         </CardTitle>
         <CardBlock className="commit-hash">
-          Commit Hash:
-          <Link href="http://example.com">
-              {this.shortenCommithash(tile.currentRelease.commitHash)}
+          <Link href={`https://github.com/zowe/${tile.repository}/commit/${tile.currentRelease.commitHash}`}>
+            Release Commit Url
           </Link>
         </CardBlock>
         <CardBlock className="tile-notes">{tile.currentRelease.notes}</CardBlock>
