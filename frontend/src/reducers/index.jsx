@@ -6,6 +6,7 @@ import errorReducer from './error-reducer';
 import authenticationReducer from './authentication.reducer';
 import selectedServiceReducer from './selected-service-reducer';
 import zoweVersionsReducer from './zowe-versions-reducer';
+import updateTileReducer from './update-tiles-reducer';
 
 const reducers = {
     filtersReducer,
@@ -15,6 +16,7 @@ const reducers = {
     authenticationReducer,
     selectedServiceReducer,
     zoweVersionsReducer,
+    updateTileReducer,
 };
 
 // eslint-disable-next-line import/prefer-default-export

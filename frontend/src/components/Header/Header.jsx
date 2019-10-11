@@ -7,39 +7,25 @@ import './Header.css';
 
 export default class Header extends Component {
 
-
-    // getVersions = () => {
-    //     fetch('https://localhost:80/api/v1/catalogs/versions')
-    //         .then(res => res.json())
-    //         .then((data) => {
-    //             this.setState({ versions: data })
-    //         })
-    // }
     componentWillMount() {
         const {fetchVersions} = this.props;
         fetchVersions();
-        console.log(this.props)
+    }
+
+    handleClick = (e) => {
+        const {updateVersionSuccess} = this.props;
+        console.log(e.target.textContent)
+        const newVersion = e.target.textContent;
+        updateVersionSuccess(newVersion)
     }
 
     render() {
         const dashboard = '/ui/v1/zowecatalog/#/dashboard';
         const {versions, error} = this.props;
-        // const  text  = {...versions.version};
-        // for (i = 0; i < versions.length; i++)
-        //     const text =
-        // versions.text = versions.version;
-        const data = versions.map(o => ({text: o.version}));
+        const data = versions.map(o => ({text: o.version, onClick: event => { this.handleClick(event); }}));
 
         console.log(data)
-        // const {data, text = versions.map(o => ({text: o.version}))} = versions;
-        // const data =
-        //     [
-        //         {
-        //             text: versions,
-        //             // onClick: event => { console.log(event); }
-        //         }
-        //     ]
-        // console.log(data)
+
         return (
             <div className="header">
                 <div className="product-name">
