@@ -1,10 +1,20 @@
 import * as log from 'loglevel';
-import { of, throwError, timer } from 'rxjs';
+import { of, throwError, timer} from 'rxjs';
 import { ofType } from 'redux-observable';
-import { catchError, debounceTime, exhaustMap, map, mergeMap, retryWhen, takeUntil } from 'rxjs/operators';
+import {
+    catchError,
+    debounceTime,
+    exhaustMap,
+    map,
+    mergeMap,
+    retryWhen,
+    takeUntil,
+    filter,
+    withLatestFrom,
+} from 'rxjs/operators';
 import { FETCH_TILES_REQUEST, FETCH_TILES_STOP } from '../constants/catalog-tile-constants';
 import { fetchTilesFailed, fetchTilesRetry, fetchTilesSuccess } from '../actions/catalog-tile-actions';
-// require('dotenv').config()
+import { UPDATE_TILE_SUCCESS } from '../constants/update-tile-constants'
 
 const updatePeriod = Number(process.env.REACT_APP_STATUS_UPDATE_PERIOD);
 const debounce = Number(process.env.REACT_APP_STATUS_UPDATE_DEBOUNCE);
@@ -47,6 +57,18 @@ function getUrl(action) {
   }
   return url;
 }
+
+function getUpdateVersionUrl(action, store) {
+    const newVersion = store.value.updateTileReducer.newversion;
+    const url =
+        process.env.REACT_APP_GATEWAY_URL + process.env.REACT_APP_CATALOG_HOME + process.env.REACT_APP_CATALOG_UPDATE + '/' + newVersion;
+    console.log(url);
+    if (action.payload !== undefined) {
+        url += `/${action.newversion}`;
+    }
+    return url;
+}
+
 
 /**
  * Check the error to see if we should terminate or retry the fetch
@@ -130,3 +152,46 @@ export const fetchTilesPollingEpic = (action$, store, { ajax, scheduler }) =>
       )
     )
   );
+
+
+export const fetchUpdatedTilesPollingEpic = (action$, state$, { ajax, scheduler }) =>
+    action$.pipe(
+        ofType(UPDATE_TILE_SUCCESS),
+        debounceTime(debounce, scheduler),
+        withLatestFrom(state$),
+        filter(([, state]) => state.newversion !== ''),
+        mergeMap(action =>
+            timer(0, updatePeriod, scheduler).pipe(
+                exhaustMap(() =>
+                    ajax({
+                        url: getUpdateVersionUrl(action, state$),
+                        method: 'GET',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': checkOrigin(),
+                        },
+                    }).pipe(
+                        map(ajaxResponse => {
+                            const { response } = ajaxResponse;
+                            if (response === null || response.length === 0) {
+                                // noinspection JSValidateTypes
+                                return fetchTilesFailed(
+                                    action.payload.length > 0
+                                        ? new Error(`Could not retrieve details for Tile with ID: ${action.payload}`)
+                                        : new Error(`Could not retrieve any Tiles`)
+                                );
+                            }
+                            return fetchTilesSuccess(response);
+                        }),
+                        retryWhen(retryMechanism(scheduler)())
+                    )
+                ),
+                takeUntil(action$.ofType(FETCH_TILES_STOP)),
+                catchError(error => {
+
+                    return of(fetchTilesFailed(error));
+                })
+            )
+        )
+    );
