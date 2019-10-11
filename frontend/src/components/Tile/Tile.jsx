@@ -82,13 +82,16 @@ export default class Tile extends Component {
 
   render() {
     const { tile } = this.props;
-
+    const repoUrl = <Link href={`https://github.com/zowe/${  tile.repository}`}>
+        {`https://github.com/zowe/${  tile.repository}`}
+  </Link>
     return (
       <Card key={tile.id} className="grid-tile pop grid-item" onClick={this.handleClick} data-testid="tile">
-        <CardTitle data-testid="tile-title" subtitle={tile.repository}>
+        <CardTitle data-testid="tile-title" subtitle={repoUrl}>
           {tile.name}
         </CardTitle>
         <CardBlock className="commit-hash">
+          Commit Hash:
           <Link href="http://example.com">
               {this.shortenCommithash(tile.currentRelease.commitHash)}
           </Link>
@@ -104,3 +107,4 @@ export default class Tile extends Component {
     );
   }
 }
+
