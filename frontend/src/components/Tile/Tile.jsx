@@ -53,7 +53,7 @@ export default class Tile extends Component {
 
   handleClick = () => {
     const { tile, history } = this.props;
-    const tileRoute = `/tile/${tile.id}`;
+    const tileRoute = `/tile/${tile.name}`;
     history.push(tileRoute);
   };
 
