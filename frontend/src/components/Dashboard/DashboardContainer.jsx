@@ -5,6 +5,7 @@ import {
   fetchTilesStart,
   fetchTilesSuccess,
   fetchTilesStop,
+  fetchZoweVersion,
 } from '../../actions/catalog-tile-actions';
 import { clearService } from '../../actions/selected-service-actions';
 import { filterText, clear } from '../../actions/filter-actions';
@@ -17,6 +18,8 @@ const mapStateToProps = state => ({
   tiles: getVisibleTiles(state.tilesReducer.tiles, state.filtersReducer.text),
   fetchTilesError: state.tilesReducer.error,
   isLoading: loadingSelector(state),
+  zoweVersion: state.zoweVersionReducer.zoweVersion,
+  newversion: state.updateTileReducer.newversion,
 });
 
 const mapDispatchToProps = {
@@ -27,6 +30,7 @@ const mapDispatchToProps = {
   fetchTilesStop,
   filterText,
   clear,
+  fetchZoweVersion,
 };
 
 export default connect(
